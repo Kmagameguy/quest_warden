@@ -76,7 +76,7 @@ class Igdb::ApiClient
       end
     end
 
-    data << "fields '*';" unless data.any? { |str| str.include?("fields") }
+    data << "fields '*';" if data.none? { |str| str.include?("fields") }
 
     response = Faraday.post("#{api_base_url}/#{endpoint}") do |req|
       req.headers["Client-ID"] = twitch_oauth_client.id
