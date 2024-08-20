@@ -95,6 +95,6 @@ class Igdb::ApiClient
   end
 
   def twitch_oauth_client
-  @twitch_oauth_client ||= Twitch::OauthClient.new
+    @twitch_oauth_client ||= Twitch::OauthClient.new
   end
 end
