@@ -62,33 +62,37 @@ class Igdb::ApiClient
   ]
 
   def self.help
+    new.help
+  end
+
+  def help
     puts "Available endpoints: #{ENDPOINTS.join(", ")}"
   end
 
   def get(endpoint, params = { fields: '*' })
     raise InvalidEndpoint, "'#{endpoint}' is not a recognized request." unless ENDPOINTS.include?(endpoint.to_sym)
 
-    data = params.map do |field, value|
-      if field == :id
-        "where id = #{value};"
-      else
-        "#{field} #{value};"
-      end
-    end
-
-    data << "fields '*';" if data.none? { |str| str.include?("fields") }
-
     response = Faraday.post("#{api_base_url}/#{endpoint}") do |req|
       req.headers["Client-ID"] = twitch_oauth_client.id
       req.headers["Authorization"] = "Bearer #{twitch_oauth_client.access_token}"
       req.headers["Content-Type"] = "application/json"
-      req.body = data.join("")
+      req.body = mapped_params(params)
     end
 
     JSON.parse(response.body, object_class: OpenStruct)
   end
 
   private
+
+  def map_params(params)
+    mapped_params =
+      params.map do |field, value|
+        field == :id ? "where id = #{value};" : "#{field} #{value};"
+      end
+
+    mapped_params << "fields '*';" if mapped_params.none? { |str| str.include?("fields") }
+    mapped_params.join("")
+  end
 
   def api_base_url
     ENV.fetch("IGDB_API_BASE_URL")
