@@ -1,5 +1,5 @@
-class TwitchOauthClient
-  class TwitchApiError < StandardError; end
+class Twitch::OauthClient
+  class ApiError < StandardError; end
 
   attr_accessor :token_expiration_time
 
@@ -23,7 +23,7 @@ class TwitchOauthClient
       self.token_expiration_time = Time.current + token_data.expires_in
       @access_token = token_data.access_token
     else
-      raise TwitchApiError, "Couldn't retrieve Twitch access token."
+      raise ApiError, "Couldn't retrieve Twitch access token."
     end
   end
 

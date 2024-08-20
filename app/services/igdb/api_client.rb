@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IgdbApiClient
+class Igdb::ApiClient
   class InvalidEndpoint < StandardError; end
 
   ENDPOINTS = %i[
@@ -61,14 +61,28 @@ class IgdbApiClient
     websites
   ]
 
-  def get(endpoint)
+  def self.help
+    puts "Available endpoints: #{ENDPOINTS.join(", ")}"
+  end
+
+  def get(endpoint, params = { fields: '*' })
     raise InvalidEndpoint, "'#{endpoint}' is not a recognized request." unless ENDPOINTS.include?(endpoint.to_sym)
+
+    data = params.map do |field, value|
+      if field == :id
+        "where id = #{value};"
+      else
+        "#{field} #{value};"
+      end
+    end
+
+    data << "fields '*';" unless data.any? { |str| str.include?("fields") }
 
     response = Faraday.post("#{api_base_url}/#{endpoint}") do |req|
       req.headers["Client-ID"] = twitch_oauth_client.id
       req.headers["Authorization"] = "Bearer #{twitch_oauth_client.access_token}"
       req.headers["Content-Type"] = "application/json"
-      req.body = "fields *;"
+      req.body = data.join("")
     end
 
     JSON.parse(response.body, object_class: OpenStruct)
@@ -81,6 +95,6 @@ class IgdbApiClient
   end
 
   def twitch_oauth_client
-    @twitch_oauth_client ||= TwitchOauthClient.new
+  @twitch_oauth_client ||= Twitch::OauthClient.new
   end
 end
