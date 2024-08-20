@@ -76,7 +76,7 @@ class Igdb::ApiClient
       req.headers["Client-ID"] = twitch_oauth_client.id
       req.headers["Authorization"] = "Bearer #{twitch_oauth_client.access_token}"
       req.headers["Content-Type"] = "application/json"
-      req.body = mapped_params(params)
+      req.body = map_params(params)
     end
 
     JSON.parse(response.body, object_class: OpenStruct)
@@ -90,8 +90,12 @@ class Igdb::ApiClient
         field == :id ? "where id = #{value};" : "#{field} #{value};"
       end
 
-    mapped_params << "fields '*';" if mapped_params.none? { |str| str.include?("fields") }
+    mapped_params << "fields '*';" if missing_fields_parameter?(mapped_params)
     mapped_params.join("")
+  end
+
+  def missing_fields_parameter?(params)
+    params.none? { |str| str.include?("fields") }
   end
 
   def api_base_url
