@@ -20,6 +20,7 @@ gem "jbuilder"
 gem "redis", ">= 4.0.1"
 
 gem "faraday"
+gem "igdb_client", git: "git@github.com:Kmagameguy/igdb_client.git", tag: "0.1.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -56,6 +57,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
+  # gem "capybara"
   # gem "selenium-webdriver"
 end
