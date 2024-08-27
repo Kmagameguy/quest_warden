@@ -20,7 +20,7 @@ gem "jbuilder"
 gem "redis", ">= 4.0.1"
 
 gem "faraday"
-gem "igdb_client", git: "git@github.com:Kmagameguy/igdb_client.git", tag: "0.1.0"
+gem "igdb_client", git: "git@github.com:Kmagameguy/igdb_client.git", tag: "1.0.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
