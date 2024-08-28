@@ -1,0 +1,10 @@
+<% if @games.load.present? %>
+  <h1>Gamez</h1>
+  <ul>
+  <% @games.each do |game| %>
+    <li><%= game.name %> (<%= game.platforms.first.name %>)</li>
+  <% end %>
+  </ul>
+<% else %>
+  <p>No games found.  Perhaps you forgot to import some?</p>
+<% end %>
