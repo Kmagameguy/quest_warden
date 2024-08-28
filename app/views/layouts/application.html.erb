@@ -18,6 +18,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav>
+        <%= render "search/form" %>
+      </nav>
+    </header>
+
+    <main>
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
