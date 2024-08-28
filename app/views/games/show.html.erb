@@ -1,5 +1,5 @@
 <h1><%= @game.name %></h1>
-<%= @game.id %>
 
 <p>Platforms: <%= @game.platforms.pluck(:name).join(", ") %></p>
 <p>Summary: <%= @game.summary %></p>
+<%= link_to "Back", root_path %>
