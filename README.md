@@ -1,4 +1,4 @@
-# Game App
+# Quest Warden
 
 This is a rough, self-hosted app designed to make tracking game-related things fun.
 Track your backlog, grow your wishlist, and rate/review your games.

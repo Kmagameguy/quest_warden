@@ -1,4 +1,4 @@
-name: "game_app"
+name: "quest_warden"
 
 services:
   rails-app:
