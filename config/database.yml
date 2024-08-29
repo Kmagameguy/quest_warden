@@ -18,6 +18,8 @@ development:
 test:
   <<: *default
   database: quest_warden_test
+  username: root
+  password: ''
 
 production:
   <<: *default
