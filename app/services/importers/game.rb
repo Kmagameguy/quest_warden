@@ -1,7 +1,6 @@
 module Importers
   class Game < Base
     def import_by_id(id)
-      pp igdb.get(:games, id: id)
       game_data = igdb.get(:games, id: id).to_h
 
       raise_import_error if game_data.blank?
@@ -15,7 +14,7 @@ module Importers
     end
 
     def import_platforms(platform_ids)
-      Array(platform_ids).each_slice(4) do |batch|
+      Array(platform_ids).uniq.each_slice(4) do |batch|
         batch.each do |platform_id|
           puts "Importing platform with id: #{platform_id}"
           ::Importers::Platform.new.import_by_id(platform_id)
