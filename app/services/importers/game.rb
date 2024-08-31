@@ -1,5 +1,7 @@
 module Importers
   class Game < Base
+    BATCH_LOOP_DELAY = 1.1 # seconds
+
     def import_by_id(id)
       game_data = igdb.get(:games, id: id).to_h
 
@@ -8,8 +10,12 @@ module Importers
       ActiveRecord::Base.transaction do
         game = ::Game.find_or_create_by(game_data.slice(:id, :name))
         game.update!(game_data.slice(:storyline, :summary))
+
         import_platforms(game_data[:platforms])
+        import_genres(game_data[:genres])
+
         game.platforms << ::Platform.where(id: game_data[:platforms])
+        game.genres << ::Genre.where(id: game_data[:genres])
       end
     end
 
@@ -19,7 +25,17 @@ module Importers
           puts "Importing platform with id: #{platform_id}"
           ::Importers::Platform.new.import_by_id(platform_id)
         end
-        sleep(2.0)
+        sleep(BATCH_LOOP_DELAY)
+      end
+    end
+
+    def import_genres(genre_ids)
+      Array(genre_ids).uniq.each_slice(4) do |batch|
+        batch.each do |genre_id|
+          puts "Importing genre with id: #{genre_id}"
+          ::Importers::Genre.new.import_by_id(genre_id)
+        end
+        sleep(BATCH_LOOP_DELAY)
       end
     end
   end

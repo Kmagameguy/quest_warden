@@ -4,7 +4,7 @@
   <h2><%= "#{pluralize(@games.count, "Game")}" %> found.</h2>
   <ul>
     <% @games.each do |game| %>
-      <li><%= link_to "#{game.name}", game_path(game.id) %></li>
+      <li><%= link_to "#{game.name} (#{Platform.where(id: game.platforms).pluck(:name).join(', ')})", game_path(game.id) %></li>
     <% end %>
   </ul>
 <% else %>
