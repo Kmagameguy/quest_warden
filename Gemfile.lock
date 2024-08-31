@@ -105,6 +105,7 @@ GEM
       logger
     faraday-net_http (3.3.0)
       net-http
+    foreman (0.88.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -249,6 +250,12 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.3.1)
+    sidekiq (7.3.1)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -297,6 +304,7 @@ DEPENDENCIES
   debug
   dotenv
   faraday
+  foreman
   igdb_client!
   importmap-rails
   jbuilder
@@ -304,6 +312,7 @@ DEPENDENCIES
   rails (~> 7.2.0)
   redis (>= 4.0.1)
   rubocop-rails-omakase
+  sidekiq
   sprockets-rails
   stimulus-rails
   trilogy
