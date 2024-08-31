@@ -1,7 +1,7 @@
 module Importers
   class Platform < Base
     def import_by_id(id)
-      platform_data = igdb.get(:platforms, id: id).first.to_h
+      platform_data = igdb.get(:platforms, id: id).to_h
 
       raise_import_error if platform_data.blank?
 

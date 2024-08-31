@@ -1,7 +1,8 @@
 module Importers
   class Game < Base
     def import_by_id(id)
-      game_data = igdb.get(:games, id: id).first.to_h
+      pp igdb.get(:games, id: id)
+      game_data = igdb.get(:games, id: id).to_h
 
       raise_import_error if game_data.blank?
 
