@@ -14,8 +14,8 @@ module Importers
         import_platforms(game_data[:platforms])
         import_genres(game_data[:genres])
 
-        game.platforms << ::Platform.where(id: game_data[:platforms])
-        game.genres << ::Genre.where(id: game_data[:genres])
+        game.platforms = ::Platform.where(id: game_data[:platforms])
+        game.genres = ::Genre.where(id: game_data[:genres])
       end
     end
 
