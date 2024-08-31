@@ -17,7 +17,7 @@ class IgdbSearchService
   # later if there's a need for it.
   def rebuild_games
     grouped_results.map do |name, properties|
-      combined_platforms = properties.flat_map(&:platforms).uniq
+      combined_platforms = properties.flat_map(&:platforms).compact.uniq
 
       OpenStruct.new(
         id: properties.first.id,
