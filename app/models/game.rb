@@ -5,4 +5,6 @@ class Game < ApplicationRecord
   validates :name, presence: true
 
   has_and_belongs_to_many :platforms
+
+  default_scope { order(:name) }
 end
