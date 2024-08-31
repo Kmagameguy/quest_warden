@@ -9,7 +9,7 @@ module Importers
 
       ActiveRecord::Base.transaction do
         game = ::Game.find_or_create_by(game_data.slice(:id, :name))
-        game.update!(game_data.slice(:storyline, :summary))
+        game.update!(game_data.slice(:storyline, :summary, :first_release_date))
 
         import_platforms(game_data[:platforms])
         import_genres(game_data[:genres])
@@ -18,6 +18,8 @@ module Importers
         game.genres = ::Genre.where(id: game_data[:genres])
       end
     end
+
+    private
 
     def import_platforms(platform_ids)
       Array(platform_ids).uniq.each_slice(4) do |batch|
