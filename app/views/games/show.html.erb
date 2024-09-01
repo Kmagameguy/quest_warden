@@ -9,7 +9,7 @@
   <h3>Developers:</h3>
   <ul>
     <% @game.developers.each do |developer| %>
-      <li><%= developer.name %></li>
+      <li><%= link_to "#{developer.name}", company_path(developer) %></li>
     <% end %>
   </ul>
 <% end %>
@@ -18,7 +18,7 @@
   <h3>Publishers:</h3>
   <ul>
     <% @game.publishers.each do |publisher| %>
-      <li><%= publisher.name %></li>
+      <li><%= link_to "#{publisher.name}", company_path(publisher) %></li>
     <% end %>
   </ul>
 <% end %>
@@ -27,7 +27,7 @@
   <h3>Ported By:</h3>
   <ul>
     <% @game.ported_by.each do |porter| %>
-      <li><%= porter.name %></li>
+      <li><%= link_to "#{porter.name}", company_path(porter) %></li>
     <% end %>
   </ul>
 <% end %>
@@ -36,7 +36,7 @@
   <h3>Supporting Companies:</h3>
   <ul>
     <% @game.supporting_companies.each do |supporting_company| %>
-      <li><%= supporting_company.name %></li>
+      <li><%= link_to "#{supporting_company.name}", company_path(supporting_company) %></li>
     <% end %>
   </ul>
 <% end %>

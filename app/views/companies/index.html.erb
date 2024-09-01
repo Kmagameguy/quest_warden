@@ -1,0 +1,12 @@
+<% if @companies.load.present? %>
+  <h1>Companiez</h1>
+  <ul>
+  <% @companies.each do |company| %>
+    <li><%= link_to "#{company.name}", company_path(company) %></li>
+  <% end %>
+  </ul>
+<% else %>
+  <p>No companies found.  Perhaps you forgot to import some?</p>
+<% end %>
+
+<%= link_to "Home", root_path %>
