@@ -6,6 +6,24 @@ class Game < ApplicationRecord
 
   has_and_belongs_to_many :platforms
   has_and_belongs_to_many :genres
+  has_many :involved_companies, dependent: :destroy
+  has_many :companies, through: :involved_companies
+
+  has_many :developers, -> { merge(InvolvedCompany.developers) },
+                             through: :involved_companies,
+                             source: :company
+
+  has_many :publishers, -> { merge(InvolvedCompany.publishers) },
+                             through: :involved_companies,
+                             source: :company
+
+  has_many :ported_by,  -> { merge(InvolvedCompany.porting) },
+                             through: :involved_companies,
+                             source: :company
+
+  has_many :supporting_companies, -> { merge(InvolvedCompany.supporting) },
+                                       through: :involved_companies,
+                                       source: :company
 
   default_scope { order(:name) }
 
@@ -15,5 +33,14 @@ class Game < ApplicationRecord
 
   def first_release_date_present?
     read_attribute(:first_release_date).present?
+  end
+
+  private
+
+  # Protect this association from being called directly; it's really
+  # only useful as a :through table for setting up the more friendly
+  # developers/publishers/etc associations
+  def involved_companies
+    super
   end
 end
