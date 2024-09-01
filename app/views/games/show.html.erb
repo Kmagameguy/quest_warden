@@ -4,4 +4,41 @@
 <p>Genres: <%= @game.genres.pluck(:name).join(", ") %></p>
 <p>Platforms: <%= @game.platforms.pluck(:name).join(", ") %></p>
 <p>Summary: <%= @game.summary %></p>
+
+<% if @game.developers.present? %>
+  <h3>Developers:</h3>
+  <ul>
+    <% @game.developers.each do |developer| %>
+      <li><%= developer.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @game.publishers.present? %>
+  <h3>Publishers:</h3>
+  <ul>
+    <% @game.publishers.each do |publisher| %>
+      <li><%= publisher.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @game.ported_by.present? %>
+  <h3>Ported By:</h3>
+  <ul>
+    <% @game.ported_by.each do |porter| %>
+      <li><%= porter.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @game.supporting_companies.present? %>
+  <h3>Supporting Companies:</h3>
+  <ul>
+    <% @game.supporting_companies.each do |supporting_company| %>
+      <li><%= supporting_company.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= link_to "Home", root_path %>
