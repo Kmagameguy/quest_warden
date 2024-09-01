@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :games, only: %i[ index show ]
+  resources :companies, only: %i[ index show ]
   get "search", to: "search#index"
 
   mount Sidekiq::Web => "/sidekiq"

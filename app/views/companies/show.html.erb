@@ -1,0 +1,46 @@
+<h1><%= @company.name %></h1>
+
+<% if @company.parent.present? %>\
+  <h3>Parent Company:</h3>
+  <%= link_to "#{@company.parent.name}", company_path(@company.parent) %>
+<% end %>
+
+<% if @company.developed_games.present? %>
+  <h3>Developed Games:</h3>
+  <ul>
+    <% @company.developed_games.each do |game| %>
+      <li><%= link_to "#{game.name}", game_path(game)%></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @company.published_games.present? %>
+  <h3>Published Games:</h3>
+  <ul>
+    <% @company.published_games.each do |game| %>
+      <li><%= link_to "#{game.name}", game_path(game) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @company.ported_games.present? %>
+  <h3>Ported Games:</h3>
+  <ul>
+    <% @company.ported_games.each do |game| %>
+      <li><%= link_to "#{game.name}", game_path(game) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @company.game_contributions.present? %>
+  <h3>Other Contributions:</h3>
+  <ul>
+    <li><%= link_to "#{game.name}", game_path(game) %></li>
+  </ul>
+<% end %>
+
+<h5>Navigation:</h5>
+<ul>
+  <li><%= link_to "Other Companies", companies_path %></li>
+  <li><%= link_to "Home", root_path %></li>
+</ul>
