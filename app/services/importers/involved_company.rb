@@ -2,9 +2,7 @@ module Importers
   class InvolvedCompany
     include ::Importers::ImporterErrorable
 
-    def import_by_id(id)
-      involved_company_data = IgdbService.instance.get(:involved_companies, id: id).to_h
-
+    def import(involved_company_data)
       raise ImportError if involved_company_data.blank?
 
       company_data = IgdbService.instance.get(:companies, id: involved_company_data[:company]).to_h

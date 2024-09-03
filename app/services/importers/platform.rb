@@ -2,9 +2,7 @@ module Importers
   class Platform
     include ::Importers::ImporterErrorable
 
-    def import_by_id(id)
-      platform_data = IgdbService.instance.get(:platforms, id: id).to_h
-
+    def import(platform_data)
       raise ImportError if platform_data.blank?
 
       ActiveRecord::Base.transaction do

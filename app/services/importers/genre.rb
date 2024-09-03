@@ -2,9 +2,7 @@ module Importers
   class Genre
     include ::Importers::ImporterErrorable
 
-    def import_by_id(id)
-      genre_data = IgdbService.instance.get(:genres, id: id).to_h
-
+    def import(genre_data)
       raise ImportError if genre_data.blank?
 
       ActiveRecord::Base.transaction do
