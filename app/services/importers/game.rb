@@ -1,11 +1,13 @@
 module Importers
   class Game
+    include ::Importers::ImporterErrorable
+
     BATCH_LOOP_DELAY = 1.1 # seconds
 
     def import_by_id(id)
-      game_data = igdb.get(:games, id: id).to_h
+      game_data = IgdbService.instance.get(:games, id: id).to_h
 
-      raise_import_error if game_data.blank?
+      raise ImportError if game_data.blank?
 
       ActiveRecord::Base.transaction do
         game = ::Game.find_or_create_by(game_data.slice(:id, :name))
@@ -28,7 +30,7 @@ module Importers
       Array(platform_ids).uniq.each_slice(4) do |batch|
         batch.each do |platform_id|
           puts "Importing platform with id: #{platform_id}"
-          ::Importers::Platform.new(igdb_client: igdb).import_by_id(platform_id)
+          ::Importers::Platform.new.import_by_id(platform_id)
         end
         sleep(BATCH_LOOP_DELAY)
       end
@@ -38,7 +40,7 @@ module Importers
       Array(genre_ids).uniq.each_slice(4) do |batch|
         batch.each do |genre_id|
           puts "Importing genre with id: #{genre_id}"
-          ::Importers::Genre.new(igdb_client: igdb).import_by_id(genre_id)
+          ::Importers::Genre.new.import_by_id(genre_id)
         end
         sleep(BATCH_LOOP_DELAY)
       end
@@ -50,14 +52,10 @@ module Importers
       Array(involved_company_ids).uniq.each_slice(3) do |batch|
         batch.each do |involved_company_id|
           puts "Importing Involved Company with id: #{involved_company_id}"
-          ::Importers::InvolvedCompany.new(igdb_client: igdb).import_by_id(involved_company_id)
+          ::Importers::InvolvedCompany.new.import_by_id(involved_company_id)
         end
         sleep(BATCH_LOOP_DELAY)
       end
-    end
-
-    def igdb
-      @igdb ||= IgdbClient::Api.new
     end
   end
 end

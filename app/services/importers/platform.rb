@@ -1,9 +1,11 @@
 module Importers
-  class Platform < Base
-    def import_by_id(id)
-      platform_data = igdb.get(:platforms, id: id).to_h
+  class Platform
+    include ::Importers::ImporterErrorable
 
-      raise_import_error if platform_data.blank?
+    def import_by_id(id)
+      platform_data = IgdbService.instance.get(:platforms, id: id).to_h
+
+      raise ImportError if platform_data.blank?
 
       ActiveRecord::Base.transaction do
         platform = ::Platform.find_or_create_by(platform_data.slice(:id, :name))
