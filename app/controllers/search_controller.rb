@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   before_action :check_query, only: :index
   def index
     if sanitized_query.present?
-      @games = IgdbSearchService.new.search(sanitized_query)
+      @games = IgdbService.instance.game_search(sanitized_query)
     else
       @games = Game.none
     end

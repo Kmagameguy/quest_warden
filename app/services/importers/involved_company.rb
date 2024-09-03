@@ -1,13 +1,13 @@
 module Importers
-  class InvolvedCompany < Base
-    def import_by_id(id)
-      involved_company_data = igdb.get(:involved_companies, id: id).to_h
+  class InvolvedCompany
+    include ::Importers::ImporterErrorable
 
-      raise_import_error if involved_company_data.blank?
+    def import(involved_company_data)
+      raise ImportError if involved_company_data.blank?
 
-      company_data = igdb.get(:companies, id: involved_company_data[:company]).to_h
+      company_data = IgdbService.instance.get(:companies, id: involved_company_data[:company]).to_h
 
-      raise_import_error if company_data.blank?
+      raise ImportError if company_data.blank?
 
       ActiveRecord::Base.transaction do
         company = ::Company.find_or_create_by(company_data.slice(:id, :name))
