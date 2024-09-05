@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Kmagameguy/igdb_client.git
-  revision: 68500d0e737d3ca51d946b146c90b15283c7ba55
-  tag: 2.0.1
+  revision: cdde92bb528026cbe8753a8336865f61bfe0c69b
+  tag: 2.5.0
   specs:
-    igdb_client (2.0.1)
+    igdb_client (2.5.0)
       activesupport
       dotenv
       faraday
