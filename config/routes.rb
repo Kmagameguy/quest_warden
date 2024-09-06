@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :games, only: %i[ index show ]
-  resources :companies, only: %i[ index show ]
+  resources :users,         only: %i[ index new create ]
+  resources :games,         only: %i[ index show ]
+  resources :companies,     only: %i[ index show ]
   get "search", to: "search#index"
 
   mount Sidekiq::Web => "/sidekiq"
