@@ -19,15 +19,16 @@
 
   <body>
     <header>
-      <%= render "layouts/nav" %>
-    </header>
-
-    <main>
       <% flash.each do |key, message| %>
         <div class="alert alert-<%= key %>">
           <%= message %>
         </div>
       <% end %>
+      
+      <%= render "layouts/nav" %>
+    </header>
+
+    <main>
       <%= yield %>
     </main>
 
