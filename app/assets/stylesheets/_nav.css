@@ -1,0 +1,11 @@
+#main-nav {
+  display: flex;
+  gap: 0.45rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+#main-nav >* {
+  margin: 0;
+}

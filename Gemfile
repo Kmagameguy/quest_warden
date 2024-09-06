@@ -21,6 +21,7 @@ gem "redis", ">= 4.0.1"
 
 gem "faraday"
 gem "igdb_client", git: "https://github.com/Kmagameguy/igdb_client.git", tag: "2.5.0"
+gem "bcrypt"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
