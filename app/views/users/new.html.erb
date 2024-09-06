@@ -1,4 +1,4 @@
-<h1>Users#new</h1>
+<h1>Create Account</h1>
 
 <%= form_with model: @user do |f| %>
     <% if @user.errors.any? %>
@@ -11,7 +11,7 @@
         </div>
     <% end %>
     <div>
-        <%= f.label :name %><br>
+        <%= f.label :name, "Username" %><br>
         <%= f.text_field :name %>
     </div>
     <div>
@@ -23,6 +23,6 @@
         <%= f.password_field :password_confirmation %>
     </div>
     <p>
-        <%= f.submit %>
+        <%= f.submit "Sign Up" %>
     </p>
 <% end %>
