@@ -1,0 +1,9 @@
+<nav id="main-nav">
+    <%= render "search/form" %>
+    <% if current_user.present? %>
+        <p>Hello, <%= current_user.name %></p>
+         <%= link_to "Log Out", user_session_path(current_user), data: { turbo_method: :delete } %><br>
+    <% else %>
+        <%= link_to "Login", new_user_session_path %><br>
+    <% end %>
+</nav>
