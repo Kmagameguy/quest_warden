@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :users,         only: %i[ index new create ]
+  resources :user_sessions, only: %i[ new create destroy ]
   resources :games,         only: %i[ index show ]
   resources :companies,     only: %i[ index show ]
   get "search", to: "search#index"
