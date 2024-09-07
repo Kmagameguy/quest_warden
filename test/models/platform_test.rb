@@ -15,12 +15,14 @@ class PlatformTest < ActiveSupport::TestCase
 
     it "must have an id" do
       @platform.id = nil
+
       _(@platform).must_be :invalid?
       _(@platform.errors[:id]).must_include "can't be blank"
     end
 
     it "must have an integer id" do
       @platform.id = "string"
+
       _(@platform).must_be :invalid?
       _(@platform.errors[:id]).must_include "is not a number"
     end
@@ -29,12 +31,14 @@ class PlatformTest < ActiveSupport::TestCase
       @platform.save
       duplicate_platform = @platform.dup
       duplicate_platform.id = @platform.id
+
       _(duplicate_platform).must_be :invalid?
       _(duplicate_platform.errors[:id]).must_include "has already been taken"
     end
 
     it "must have a name" do
       @platform.name = nil
+
       _(@platform).must_be :invalid?
       _(@platform.errors[:name]).must_include "can't be blank"
     end
