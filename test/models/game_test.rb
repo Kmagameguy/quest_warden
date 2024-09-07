@@ -18,12 +18,14 @@ class GameTest < ActiveSupport::TestCase
 
     it "must have an id" do
       @game.id = nil
+
       _(@game).must_be :invalid?
       _(@game.errors[:id]).must_include "can't be blank"
     end
 
     it "must have an integer id" do
       @game.id = "string"
+
       _(@game).must_be :invalid?
       _(@game.errors[:id]).must_include "is not a number"
     end
@@ -32,12 +34,14 @@ class GameTest < ActiveSupport::TestCase
       @game.save
       duplicate_game = @game.dup
       duplicate_game.id = @game.id
+
       _(duplicate_game).must_be :invalid?
       _(duplicate_game.errors[:id]).must_include "has already been taken"
     end
 
     it "must have a name" do
       @game.name = nil
+
       _(@game).must_be :invalid?
       _(@game.errors[:name]).must_include "can't be blank"
     end
@@ -76,6 +80,7 @@ class GameTest < ActiveSupport::TestCase
 
     it "should return nil if first_release_date is not present" do
       @game.first_release_date = nil
+
       assert_nil @game.first_release_date
     end
   end
@@ -87,6 +92,7 @@ class GameTest < ActiveSupport::TestCase
 
     it "returns false when the first_release_date attribute does not exist" do
       @game.first_release_date = nil
+
       assert_not @game.first_release_date?
     end
   end
