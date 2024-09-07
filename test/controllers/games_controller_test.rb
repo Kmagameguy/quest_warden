@@ -13,7 +13,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     end
 
     it "can show an individual game" do
-      get games_url(1)
+      get game_url(@game1)
       assert_response :success
       assert_select "h1", @game1.name
     end
