@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_05_015012) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_08_142553) do
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "country"
     t.string "name", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_05_015012) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.decimal "value", precision: 3, scale: 1, null: false
+    t.integer "rateable_id", null: false
+    t.string "rateable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "rateable_id", "rateable_type"], name: "index_ratings_on_user_id_and_rateable_id_and_rateable_type", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
