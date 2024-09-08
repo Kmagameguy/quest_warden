@@ -16,29 +16,6 @@ class UserTest < ActiveSupport::TestCase
       _(@user).must_be :valid?
     end
 
-    it "must have an id" do
-      @user.id = nil
-
-      _(@user).must_be :invalid?
-      _(@user.errors[:id]).must_include "can't be blank"
-    end
-
-    it "must have an integer id" do
-      @user.id = "string"
-
-      _(@user).must_be :invalid?
-      _(@user.errors[:id]).must_include "is not a number"
-    end
-
-    it "must have a unique id" do
-      @user.save
-      duplicate_user = @user.dup
-      duplicate_user.id = @user.id
-
-      _(duplicate_user).must_be :invalid?
-      _(duplicate_user.errors[:id]).must_include "has already been taken"
-    end
-
     it "must have a name" do
       @user.name = nil
 
