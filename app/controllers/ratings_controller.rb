@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  ALLOWED_RATEABLE_TYPES = [ Game ].freeze
+
   before_action :find_rateable
   before_action :find_or_initialize_rating
 
@@ -38,7 +40,15 @@ class RatingsController < ApplicationController
   end
 
   def find_rateable
-    @rateable = params.dig(:rating, :rateable_type).constantize.find(params.dig(:rating, :rateable_id))
+    rateable_type = params.dig(:rating, :rateable_type)
+    rateable_id   = params.dig(:rating, :rateable_id)
+
+    if rateable_type_allowed?(rateable_type)
+      @rateable = rateable_type.constantize.find(rateable_id)
+    else
+      flash[:alert] = "Invalid type specified."
+      redirect_to @rateable
+    end
   end
 
   def rating_params
@@ -57,5 +67,9 @@ class RatingsController < ApplicationController
 
   def failure_message(render_action)
     "There was an error #{render_action == :create ? 'submitting' : 'updating'} your rating."
+  end
+
+  def rateable_type_allowed?(type)
+    ALLOWED_RATEABLE_TYPES.map(&:name).include?(type)
   end
 end
