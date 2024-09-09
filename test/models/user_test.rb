@@ -40,6 +40,15 @@ class UserTest < ActiveSupport::TestCase
       assert_respond_to @user, :ratings
       assert_equal rating.user, @user
     end
+
+    it "should have one backlog" do
+      assert_respond_to @user, :backlog
+    end
+
+    it "should automatically create a backlog when a user is created" do
+      new_user = User.create(id: @user.id + 1, name: "Jane Doe", password: "password", password_confirmation: "password")
+      assert_not_nil new_user.backlog
+    end
   end
 
   describe "password authentication" do

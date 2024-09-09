@@ -4,6 +4,7 @@ class Game < ApplicationRecord
                  numericality: { only_integer: true }
   validates :name, presence: true
 
+  has_and_belongs_to_many :backlogs
   has_and_belongs_to_many :platforms
   has_and_belongs_to_many :genres
   has_many :involved_companies, dependent: :destroy
