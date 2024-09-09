@@ -1,0 +1,13 @@
+<%= form_with(model: [rateable, rateable.ratings.find_or_initialize_by(user: current_user)], local: true, data: { turbo: false }) do |form| %>
+  <%= form.hidden_field :rateable_type, value: rateable.class.name %>
+  <%= form.hidden_field :rateable_id, value: rateable.id %>
+
+  <div class="field"
+    <%= form.label :value, "Rating" %>
+    <%= form.select :value, options_for_select(Rating::VALID_VALUES, rateable.ratings.find_by(user: current_user)&.value), include_blank: "Select rating" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit rating" %>
+  </div>
+<% end %>

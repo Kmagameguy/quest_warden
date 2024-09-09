@@ -9,6 +9,8 @@ class UserTest < ActiveSupport::TestCase
       password: @valid_password,
       password_confirmation: @valid_password
     )
+
+    @game = Game.create!(id: 1, name: "A cool game", storyline: "this is a storyline", summary: "this is a summary", first_release_date: 798940800)
   end
 
   describe "validations" do
@@ -28,6 +30,15 @@ class UserTest < ActiveSupport::TestCase
 
       _(@user).must_be :invalid?
       _(@user.errors[:password_confirmation]).must_include "doesn't match Password"
+    end
+  end
+
+  describe "associations" do
+    it "can have many ratings" do
+      rating = Rating.new(value: 1.5, user: @user, rateable: @game)
+
+      assert_respond_to @user, :ratings
+      assert_equal rating.user, @user
     end
   end
 

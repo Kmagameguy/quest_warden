@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :users,         only: %i[ index new create ]
   resources :user_sessions, only: %i[ new create destroy ]
-  resources :games,         only: %i[ index show ]
+  resources :games,         only: %i[ index show ] do
+    resources :ratings, only: %i[ create update destroy ]
+  end
   resources :companies,     only: %i[ index show ]
   get "search", to: "search#index"
 

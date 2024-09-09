@@ -25,6 +25,8 @@ class Game < ApplicationRecord
                                        through: :involved_companies,
                                        source: :company
 
+  has_many :ratings, as: :rateable
+
   default_scope { order(:name) }
 
   def first_release_date

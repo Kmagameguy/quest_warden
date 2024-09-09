@@ -71,6 +71,14 @@ class GameTest < ActiveSupport::TestCase
     it "can have many contributing companies" do
       assert @game.supporting_companies.is_a?(ActiveRecord::Associations::CollectionProxy)
     end
+
+    it "can have many ratings" do
+      user = User.create!(id: 1, name: "John Doe", password: "password", password_confirmation: "password")
+      rating = Rating.new(value: 1.5, user: user, rateable: @game)
+
+      assert_respond_to @game, :ratings
+      assert_equal rating.rateable, @game
+    end
   end
 
   describe "#first_release_date" do
