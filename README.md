@@ -24,6 +24,6 @@ The projecct includes a rake task that will import a small collection of game in
 ## Features
 Feature set is currently very limited as this is an early, WIP build.  See: https://github.com/kmagameguy/igdb_client for IGDB Client usage.
 
-To run the app just use bin/rails server.  Go to 127.0.0.1:3000/games to view the games index.  You can also view individual games by id, for example: /games/1204
+To run the app just run `bin/dev` from the root directory.  Go to 127.0.0.1:5000/games to view the games index.  You can also view individual games by id, for example: /games/1204
 
 Trying to view a game that doesn't yet exist in the application database will automatically try to import the relevant data from the IGDB (if a matching ID can be found).
