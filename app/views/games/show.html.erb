@@ -5,6 +5,11 @@
 
 <% if current_user %>
   <%= render "ratings/form", rateable: @game %>
+  <% if current_user.backlog.games.include?(@game) %>
+    <%= button_to "Remove from backlog", remove_game_user_backlog_path(current_user, @game), method: :delete %>
+  <% else %>
+    <%= button_to "Add to backlog", add_game_user_backlog_path(current_user, @game), method: :post %>
+  <% end %>
 <% end %>
 
 <p>Genres: <%= @game.genres.pluck(:name).join(", ") %></p>
