@@ -2,8 +2,9 @@ class User < ApplicationRecord
   has_secure_password
   validates :name, presence: true, uniqueness: true
 
-  has_many :ratings
-  has_one  :backlog, dependent: :destroy
+  has_many :ratings,   dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_one  :backlog,   dependent: :destroy
 
   after_create :create_backlog
 

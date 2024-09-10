@@ -26,7 +26,9 @@ class Game < ApplicationRecord
                                        through: :involved_companies,
                                        source: :company
 
-  has_many :ratings, as: :rateable
+  has_many :ratings,   as: :rateable,    dependent: :destroy
+  has_many :favorites, as: :favoritable, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
 
   default_scope { order(:name) }
 
