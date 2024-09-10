@@ -79,6 +79,10 @@ class GameTest < ActiveSupport::TestCase
       assert_respond_to @game, :ratings
       assert_equal rating.rateable, @game
     end
+
+    it "can belong to many backlogs" do
+      assert_respond_to @game, :backlogs
+    end
   end
 
   describe "#first_release_date" do

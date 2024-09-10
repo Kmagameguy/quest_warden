@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_08_142553) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_09_115359) do
+  create_table "backlogs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_backlogs_on_user_id"
+  end
+
+  create_table "backlogs_games", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "backlog_id", null: false
+    t.index ["backlog_id"], name: "index_backlogs_games_on_backlog_id"
+    t.index ["game_id"], name: "index_backlogs_games_on_game_id"
+  end
+
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "country"
     t.string "name", null: false
@@ -94,6 +108,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_142553) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "backlogs", "users"
   add_foreign_key "companies", "companies", column: "parent_id"
   add_foreign_key "involved_companies", "companies"
   add_foreign_key "involved_companies", "games"

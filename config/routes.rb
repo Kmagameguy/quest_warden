@@ -11,10 +11,15 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :users,         only: %i[ index new create ]
+  resources :users,         only: %i[ index new create ] do
+    resource :backlog,      only: %i[ show ] do
+      post "add_game/:game_id", to: "backlogs#add_game", as: "add_game"
+      delete "remove_game/:game_id", to: "backlogs#remove_game", as: "remove_game"
+    end
+  end
   resources :user_sessions, only: %i[ new create destroy ]
   resources :games,         only: %i[ index show ] do
-    resources :ratings, only: %i[ create update destroy ]
+    resources :ratings,       only: %i[ create update destroy ]
   end
   resources :companies,     only: %i[ index show ]
   get "search", to: "search#index"
