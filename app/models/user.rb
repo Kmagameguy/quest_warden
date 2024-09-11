@@ -8,6 +8,10 @@ class User < ApplicationRecord
 
   after_create :create_backlog
 
+  def favorited?(favoritable)
+    favorites.exists?(favoritable: favoritable)
+  end
+
   private
 
   def create_backlog
