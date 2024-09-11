@@ -21,4 +21,26 @@ class FavoriteTest < ActiveSupport::TestCase
       assert_equal @favorite.favoritable, @game
     end
   end
+
+  describe "validations" do
+    it "is valid with valid attributes" do
+      favorite = Favorite.new(user: @user, favoritable: @game)
+
+      assert favorite.valid?
+    end
+
+    it "is not valid without a user" do
+      favorite = Favorite.new(favoritable: @game)
+
+      assert_not favorite.valid?
+      assert_includes favorite.errors[:user], "can't be blank"
+    end
+
+    it "is not valid without a favoritable resource" do
+      favorite = Favorite.new(user: @user)
+
+      assert_not favorite.valid?
+      assert_includes favorite.errors[:favoritable], "can't be blank"
+    end
+  end
 end

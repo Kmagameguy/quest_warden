@@ -83,6 +83,17 @@ class GameTest < ActiveSupport::TestCase
     it "can belong to many backlogs" do
       assert_respond_to @game, :backlogs
     end
+
+    it "can have many favorites" do
+      assert_respond_to @game, :favorites
+    end
+
+    it "can be favorited by users" do
+      user = User.create!(id: 1, name: "John Doe", password: "password", password_confirmation: "password")
+      Favorite.create!(user: user, favoritable: @game)
+
+      assert_includes @game.favorited_by, user
+    end
   end
 
   describe "#first_release_date" do

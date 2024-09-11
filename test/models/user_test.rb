@@ -41,6 +41,10 @@ class UserTest < ActiveSupport::TestCase
       assert_equal rating.user, @user
     end
 
+    it "can have many favorites" do
+      assert_respond_to @user, :favorites
+    end
+
     it "should have one backlog" do
       assert_respond_to @user, :backlog
     end
@@ -64,6 +68,18 @@ class UserTest < ActiveSupport::TestCase
     it "will not authenticate with an invalid password" do
       authenticated_user = User.find_by(name: @user.name).authenticate("wrong_password")
       assert_not authenticated_user
+    end
+  end
+
+  describe "#favorited?" do
+    it "returns true if a user has favorited the resource" do
+      Favorite.create!(user: @user, favoritable: @game)
+
+      assert @user.favorited?(@game)
+    end
+
+    it "returns false if a user has not favorited the resource" do
+      assert_not @user.favorited?(@game)
     end
   end
 end
