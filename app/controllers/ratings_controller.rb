@@ -41,7 +41,7 @@ class RatingsController < ApplicationController
 
   def find_rateable
     type = rateable_type(params.dig(:rating, :rateable_type))
-    rateable_id   = params.dig(:rating, :rateable_id)
+    rateable_id = params.dig(:rating, :rateable_id)
 
     if type
       @rateable = type.find(rateable_id)
