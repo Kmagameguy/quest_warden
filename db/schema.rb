@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_09_115359) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_10_212428) do
   create_table "backlogs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -33,6 +33,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_09_115359) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_companies_on_name"
     t.index ["parent_id"], name: "index_companies_on_parent_id"
+  end
+
+  create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "favoritable_id", null: false
+    t.string "favoritable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "favoritable_id", "favoritable_type"], name: "idx_on_user_id_favoritable_id_favoritable_type_2b2b890add", unique: true
   end
 
   create_table "games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

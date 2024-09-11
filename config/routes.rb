@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :user_sessions, only: %i[ new create destroy ]
   resources :games,         only: %i[ index show ] do
     resources :ratings,       only: %i[ create update destroy ]
+    resource  :favorites,     only: %i[ create destroy ]
   end
   resources :companies,     only: %i[ index show ]
   get "search", to: "search#index"

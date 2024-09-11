@@ -10,6 +10,12 @@
   <% else %>
     <%= button_to "Add to backlog", add_game_user_backlog_path(current_user, @game), method: :post %>
   <% end %>
+
+  <% if current_user.favorited?(@game) %>
+    <%= button_to "Unfavorite", game_favorites_path(@game), method: :delete %>
+  <% else %>
+    <%= button_to "Favorite", game_favorites_path(@game), method: :post %>
+  <% end %>
 <% end %>
 
 <p>Genres: <%= @game.genres.pluck(:name).join(", ") %></p>
