@@ -1,0 +1,8 @@
+<h1><%= @user.name %>'s Stats</h1>
+<p>Average Rating: <%= @user.ratings.average(:value) %></p>
+<p>Favorite games:</p>
+<ul>
+  <% @user.favorites.map(&:favoritable).each do |favoritable| %>
+    <li><%= link_to favoritable.name, polymorphic_path(favoritable) %></li>
+  <% end %>
+</ul>
