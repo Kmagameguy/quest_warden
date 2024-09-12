@@ -3,7 +3,7 @@
       <%= link_to "Home", root_path %>
     </div>
     <%= render "search/form" %>
-    <div>
+    <div id="user-links">
       <% if current_user.present? %>
           <p>Hello, <%= current_user.name %></p>
           <%= link_to "Stats", user_stats_path(current_user) %>

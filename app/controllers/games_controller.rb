@@ -1,6 +1,12 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.includes(:platforms, :genres).all
+    @letter = params[:letter]
+
+    if @letter
+      @games = Game.includes(:platforms, :genres).where("name LIKE ?", "#{@letter}%")
+    else
+      @games = Game.includes(:platforms, :genres).all
+    end
   end
 
   def show

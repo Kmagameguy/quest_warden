@@ -1,0 +1,15 @@
+#alphabet-container {
+  display: flex;
+  justify-content: center;
+}
+
+#alphabet-nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1.35rem;
+}
+
+#alphabet-nav a {
+  text-decoration: none;
+}

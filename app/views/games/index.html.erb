@@ -1,10 +1,11 @@
+<h1>Gamez</h1>
+<%= render "alphabet_nav" %>
 <% if @games.load.present? %>
-  <h1>Gamez</h1>
-  <ul>
+  <ol>
   <% @games.each do |game| %>
     <li><%= link_to "#{game.name} (#{game.platforms.pluck(:name).join(', ')})", game_path(game) %></li>
   <% end %>
-  </ul>
+  </ol>
 <% else %>
   <p>No games found.  Perhaps you forgot to import some?</p>
 <% end %>
