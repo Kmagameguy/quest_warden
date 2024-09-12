@@ -1,6 +1,6 @@
 <h1>Games in <%= @backlog.user.name %>'s Backlog</h1>
 <ul>
-  <% @backlog.games.sort.each do |game| %>
+  <% @backlog.games.each do |game| %>
     <li><%= link_to game.name, game %></li>
   <% end %>
 </ul>
