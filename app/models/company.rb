@@ -32,6 +32,7 @@ class Company < ApplicationRecord
                                      through: :involved_companies,
                                      source: :game
 
+  default_scope { order(:name) }
   private
 
   # Protect this association from being called directly; similar to
