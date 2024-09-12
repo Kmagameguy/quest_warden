@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post "add_game/:game_id", to: "backlogs#add_game", as: "add_game"
       delete "remove_game/:game_id", to: "backlogs#remove_game", as: "remove_game"
     end
+    get "stats", to: "user_stats#show"
   end
   resources :user_sessions, only: %i[ new create destroy ]
   resources :games,         only: %i[ index show ] do
