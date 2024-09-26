@@ -22,6 +22,15 @@ class RatingsControllerTest < ActionDispatch::IntegrationTest
       assert @game.ratings.where(user: @user, rateable_id: @game.id, value: 4.0).exists?
     end
 
+    it "should create a rating and remove the game from the user's backlog" do
+      @user.backlog.games << @game
+      post game_ratings_url(@game), params: { rating: @rating_params }
+
+      assert_equal flash[:notice], "Rating submitted and #{@game.name} was removed from backlog."
+      assert_redirected_to @game
+      assert @game.ratings.where(user: @user, rateable_id: @game.id, value: 4.0).exists?
+    end
+
     it "should be able to update an existing rating" do
       rating = @game.ratings.create!(user: @user, value: 2.0)
       patch game_rating_url(@game, rating), params: { rating: @rating_params }
