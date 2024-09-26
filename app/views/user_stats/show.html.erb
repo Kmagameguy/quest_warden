@@ -2,7 +2,19 @@
 <p>Average Rating: <%= @user.ratings.average(:value) %></p>
 <p>Favorite games:</p>
 <ul>
-  <% @user.favorites.map(&:favoritable).each do |favoritable| %>
-    <li><%= link_to favoritable.name, polymorphic_path(favoritable) %></li>
+  <% @user.favorite_games.each do |game| %>
+    <li><%= link_to game.name, game_path(game) %></li>
+  <% end %>
+</ul>
+<p>Highest Rated Games:</p>
+<ul>
+  <% @user.highest_rated_games.each do |game| %>
+    <li><%= link_to game.name, game_path(game) %></li>
+  <% end %>
+</ul>
+<p>Lowest Rated Games</p>
+<ul>
+  <% @user.lowest_rated_games.each do |game| %>
+    <li><%= link_to game.name, game_path(game) %></li>
   <% end %>
 </ul>
