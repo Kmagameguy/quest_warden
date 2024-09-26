@@ -57,7 +57,7 @@ class RatingsController < ApplicationController
 
   def save_rating(success_message, render_action)
     if @rating.save
-      flash[:notice] = success_message
+      remove_from_backlog(success_message)
     else
       flash[:alert] = failure_message(render_action)
     end
@@ -71,5 +71,14 @@ class RatingsController < ApplicationController
 
   def rateable_type(type)
     ALLOWED_RATEABLE_TYPES[type]
+  end
+
+  def remove_from_backlog(message)
+    if current_user.backlog.games.include?(@rateable)
+      current_user.backlog.games.delete(@rateable)
+      flash[:notice] = "Rating submitted and #{@rateable.name} was removed from backlog."
+    else
+      flash[:notice] = message
+    end
   end
 end
