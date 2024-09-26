@@ -11,6 +11,7 @@ class UserTest < ActiveSupport::TestCase
     )
 
     @game = Game.create!(id: 1, name: "A cool game", storyline: "this is a storyline", summary: "this is a summary", first_release_date: 798940800)
+    @game2 = Game.create!(id: 2, name: "Another cool game", storyline: "this is a storyline", summary: "this is a summary", first_release_date: 798940805)
   end
 
   describe "validations" do
@@ -80,6 +81,48 @@ class UserTest < ActiveSupport::TestCase
 
     it "returns false if a user has not favorited the resource" do
       assert_not @user.favorited?(@game)
+    end
+  end
+
+  describe "#favorite_games" do
+    it "returns a list of games that have been favorited" do
+      Favorite.create!(user: @user, favoritable: @game)
+
+      assert_includes @user.favorite_games, @game
+    end
+
+    it "returns an empty array if the user has not favorited anything yet" do
+      assert_empty @user.favorite_games
+    end
+  end
+
+  describe "#highest_rated_games" do
+    it "returns a list of games whose rating is the highest" do
+      Game.all.each_with_index do |game, index|
+        Rating.create!(user: @user, rateable: game, value: index + 1)
+      end
+
+      assert_equal 1, @user.highest_rated_games.size
+      assert_includes @user.highest_rated_games, @game2
+    end
+
+    it "returns an empty array if the user has not rated anything yet" do
+      assert_empty @user.highest_rated_games
+    end
+  end
+
+  describe "#lowest_rated_games" do
+    it "returns a list of games whose rating is the lowest" do
+      Game.all.each_with_index do |game, index|
+        Rating.create!(user: @user, rateable: game, value: index + 1)
+      end
+
+      assert_equal 1, @user.lowest_rated_games.size
+      assert_includes @user.lowest_rated_games, @game
+    end
+
+    it "returns an empty array if the user has not rated anything yet" do
+      assert_empty @user.lowest_rated_games
     end
   end
 end
