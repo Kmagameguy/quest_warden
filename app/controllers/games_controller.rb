@@ -14,7 +14,7 @@ class GamesController < ApplicationController
 
     if @game.nil?
       ActiveRecord::Base.transaction do
-        ::Importers::Game.new.import_by_id(params[:id])
+        ::Importers::Game.new.import_by_ids(params[:id])
         @game = Game.find(params[:id])
       end
     end
