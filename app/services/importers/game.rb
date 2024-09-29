@@ -15,6 +15,7 @@ module Importers
       platforms.*
       genres.*
       involved_companies.*
+      involved_companies.company.*
     ].freeze
 
     def import_by_id(id)

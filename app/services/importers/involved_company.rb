@@ -4,8 +4,9 @@ module Importers
 
     def import(involved_company_data)
       raise ImportError if involved_company_data.blank?
+      raise ImportError if involved_company_data[:company].to_h.blank?
 
-      company_data = IgdbService.instance.get(:companies, id: involved_company_data[:company]).to_h
+      company_data = involved_company_data[:company].to_h
 
       raise ImportError if company_data.blank?
 
@@ -13,7 +14,7 @@ module Importers
         company = ::Company.find_or_create_by(company_data.slice(:id, :name))
         company.update!(company_data.slice(:country, :parent_id))
 
-        involved_company = ::InvolvedCompany.find_or_initialize_by(id: involved_company_data[:id], game_id: involved_company_data[:game], company_id: involved_company_data[:company])
+        involved_company = ::InvolvedCompany.find_or_initialize_by(id: involved_company_data[:id], game_id: involved_company_data[:game], company_id: company[:id])
 
         involved_company.assign_attributes(
           developer: involved_company_data[:developer],
