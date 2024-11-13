@@ -221,10 +221,6 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    redis (5.3.0)
-      redis-client (>= 0.22.0)
-    redis-client (0.22.2)
-      connection_pool
     regexp_parser (2.9.2)
     reline (0.5.11)
       io-console (~> 0.5)
@@ -259,11 +255,6 @@ GEM
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     securerandom (0.3.2)
-    sidekiq (7.3.5)
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -321,9 +312,7 @@ DEPENDENCIES
   ostruct
   puma
   rails (~> 8.0)
-  redis (>= 4.0.1)
   rubocop-rails-omakase
-  sidekiq
   sprockets-rails
   stimulus-rails
   trilogy
@@ -332,4 +321,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.5.20
+   2.5.23
