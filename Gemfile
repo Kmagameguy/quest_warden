@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.2"
+gem "rails", "~> 8.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use trilogy as the database for Active Record
@@ -20,6 +20,7 @@ gem "jbuilder"
 gem "redis", ">= 4.0.1"
 
 gem "faraday"
+gem "ostruct"
 gem "igdb_client", git: "https://github.com/Kmagameguy/igdb_client.git", tag: "2.5.0"
 gem "bcrypt"
 
