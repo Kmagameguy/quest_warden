@@ -1,5 +1,3 @@
-require "sidekiq/web"
-
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -25,8 +23,6 @@ Rails.application.routes.draw do
   end
   resources :companies,     only: %i[ index show ]
   get "search", to: "search#index"
-
-  mount Sidekiq::Web => "/sidekiq"
 
   # Defines the root path route ("/")
   root "games#index"

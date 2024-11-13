@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_10_212428) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_13_011603) do
   create_table "backlogs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -91,6 +91,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_10_212428) do
     t.index ["supporting"], name: "index_involved_companies_on_supporting"
   end
 
+  create_table "list_games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "list_id", null: false
+    t.bigint "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_list_games_on_game_id"
+    t.index ["list_id"], name: "index_list_games_on_list_id"
+  end
+
+  create_table "lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
   create_table "platforms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "abbreviation"
     t.string "alternative_name"
@@ -121,4 +138,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_10_212428) do
   add_foreign_key "companies", "companies", column: "parent_id"
   add_foreign_key "involved_companies", "companies"
   add_foreign_key "involved_companies", "games"
+  add_foreign_key "list_games", "games"
+  add_foreign_key "list_games", "lists"
+  add_foreign_key "lists", "users"
 end
