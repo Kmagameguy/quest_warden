@@ -29,6 +29,8 @@ class Game < ApplicationRecord
   has_many :ratings,   as: :rateable,    dependent: :destroy
   has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :favorited_by, through: :favorites, source: :user
+  has_many :list_games
+  has_many :lists, through: :list_games
 
   default_scope { order(:name) }
 

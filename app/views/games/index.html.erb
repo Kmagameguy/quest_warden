@@ -1,3 +1,8 @@
+<%= form_with url: games_path, method: :get, local: false, data: { controller: "search" } do %>
+  <%= text_field_tag :query, nil, placeholder: "Search for games...", data: { action: "input->search#update" } %>
+<% end %>
+
+<div id="search-results" data-controller="results"></div>
 <h1>Gamez</h1>
 <%= render "alphabet_nav" %>
 <% if @games.load.present? %>

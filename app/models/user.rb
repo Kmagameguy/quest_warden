@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :ratings,    dependent: :destroy
   has_many :game_ratings, -> { where(rateable_type: Game.name) }, class_name: Rating.name
   has_many :favorites,  dependent: :destroy
+  has_many :lists
   has_one  :backlog,    dependent: :destroy
 
   after_create :create_backlog
