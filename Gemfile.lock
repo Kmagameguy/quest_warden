@@ -105,7 +105,7 @@ GEM
     drb (2.2.1)
     erb (5.0.2)
     erubi (1.13.1)
-    faraday (2.13.3)
+    faraday (2.13.4)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -128,7 +128,7 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    json (2.13.0)
+    json (2.13.1)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
     logger (1.7.0)
