@@ -19,7 +19,7 @@ gem "jbuilder"
 
 gem "faraday"
 gem "ostruct"
-gem "igdb_client", git: "https://github.com/Kmagameguy/igdb_client.git", tag: "2.6.3"
+gem "igdb_client", git: "https://github.com/Kmagameguy/igdb_client.git", tag: "2.7.0"
 gem "bcrypt"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
