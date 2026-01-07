@@ -283,7 +283,8 @@ GEM
     stringio (3.2.0)
     thor (1.4.0)
     timeout (0.4.4)
-    trilogy (2.9.0)
+    trilogy (2.10.0)
+      bigdecimal
     tsort (0.2.0)
     turbo-rails (2.0.20)
       actionpack (>= 7.1.0)
