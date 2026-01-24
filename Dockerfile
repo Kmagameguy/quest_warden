@@ -11,6 +11,8 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
+RUN mkdir -p db
+
 # Install base packages
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
