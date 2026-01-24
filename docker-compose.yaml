@@ -1,0 +1,22 @@
+version: "3.0"
+
+services:
+  web:
+    image: ghcr.io/kmagameguy/quest_warden:latest
+    container_name: quest_warden_web
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "1"
+      SECRET_KEY_BASE: ff616f091c932bbf61c0a25a66c17bec27ebc17e3a40f469e6acae97c08ef18181d918513e5e08f8db301429877af4b9b31fa7589b8b8540c90e7e8632289eea
+      TWITCH_API_CLIENT_ID: loxaubt8unwaxjy0mmxghpx5govp5j
+      TWITCH_API_CLIENT_SECRET: iz8ejd16utu1d0m1f04cfb7zf9hso3
+      TWITCH_API_OAUTH_URL: https://id.twitch.tv/oauth2/token
+      IGDB_API_BASE_URL: https://api.igdb.com/v4
+    volumes:
+      - quest_warden_db:/rails/db
+    restart: unless-stopped
+
+volumes:
+  quest_warden_db:
