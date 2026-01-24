@@ -4,8 +4,9 @@ source "https://rubygems.org"
 gem "rails", "~> 8.1"
 # The new asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
-# Use trilogy as the database for Active Record
-gem "trilogy"
+
+gem "sqlite3"
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
